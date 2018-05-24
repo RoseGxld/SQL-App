@@ -1,0 +1,114 @@
+----SELECT * FROM people;
+----Displays the data table
+--UPDATE people SET first_name = 'Tony' WHERE id = 1;
+----Puts 'Tony' into id
+--UPDATE people SET mobile = '152-9854' WHERE last_name = 'Smith';
+----Puts the number '152-9854' for both Thomas and Jane Smith
+--UPDATE people SET birthday = '1955-01-25'
+--WHERE last_name = 'Smith'
+--AND id = 4;
+----Changes birth date from '1987-07-06' for Thomas Smith with id number 4 to '1955-01-25'
+--UPDATE people SET mobile = '333-3333', last_name = 'Johnson'
+--WHERE first_name = 'Noelle' OR first_name = 'Raj';
+----Changes the mobile number for the two with the last name 'Johnson' whether it be 'Noelle' or 'Raj' to '333-3333'
+--SELECT COUNT(homenumber) FROM homes;
+----Displays a table with the number of homes
+--SELECT homenumber FROM homes WHERE id = 1;
+----Displays a table with the home number for the person with id 1 in the table HOMES
+--SELECT COUNT(*) FROM homes;
+----Gets the amount of entries in the table HOMES
+--SELECT COUNT(DISTINCT last_name) FROM people;
+----Displays the amount of entries with a unique last name in the people table
+--SELECT  SUM(id), AVG(id) FROM people;
+----Displays the sum of the id's as well as the avg of all the id's totalled together
+--SELECT SUM(id) AS sum, AVG(id) AS avg FROM people;
+----Changes the name of the headers from SUM(id) & AVG(id) to just sum and avg
+--SELECT MIN(birthday) FROM people;
+----Displays the oldest birthday (SELECT MIN gives the lowest value) and the formatting of the dates gives the year first which helps find the oldest birthday
+--SELECT UPPER (first_name), LOWER(last_name) FROM people;
+----Displays all the first names capitalized and all the last names lower cased from the PEOPLE table
+--SELECT REPLACE(last_name, 'a', '1') FROM people;
+----Replaces any "a" characters in last names with "1's"
+--SELECT last_name FROM people;
+----Displays all last names
+--INSERT INTO people (first_name, last_name, mobile)
+--VALUES ('Otto', 'Von Count', '656-6548');
+----Inserts Otto Von Count into the table with the mobile number '656-6548'
+--SELECT CONCAT(first_name, last_name) FROM people
+--WHERE last_name = 'Smith';
+----Concatenates the first and last names together with no space for anybody with the last name smith
+--SELECT CONCAT(first_name, ' ', last_name)
+--FROM people
+--WHERE last_name = 'Smith';
+----Similar as the previous select except with a space inserted
+--SELECT CONCAT_WS(' ',first_name, last_name, mobile)
+--FROM people WHERE last_name= 'Smith';
+----Concatenates the parameters with space for all that meet the conditions
+--SELECT homenumber, LEFT(homenumber, 3), RIGHT(homenumber, 2) FROM homes;
+----Displays a homenumber table where the first 3 digits of the number are displayed in the left column and the last two digits are displayed in the right column.
+--SELECT LENGTH(address), CHAR_LENGTH(address) FROM homes;
+----Displays a two columned table with the length as well as character length of each address.
+--SELECT first_name, last_name, YEAR(birthday) FROM people WHERE birthday >= '1970-07-06' AND birthday<='1987-07-06';
+----Displays the entry WHERE the birthday >= '1970-07-06' AND <='1987-07-06'
+--SELECT first_name, birthday FROM people WHERE first_name='Thomas' OR first_name='Raj' OR first_name='Sheeri';
+----Displays all entries with the first name's specified
+--SELECT first_name, birthday FROM people WHERE first_name IN ('Noelle', 'Thomas', 'Raj');
+----Displays all entries with the first name specified
+--SELECT first_name FROM people WHERE RIGHT(first_name,1)='e';
+----Pulls all entries with an 'e' in the first name
+--SELECT first_name FROM people WHERE first_name LIKE '%j';
+----Displays any LIKE string ending with the charcacter 'j'
+--SELECT first_name FROM people WHERE first_name LIKE '%o%';
+----Displays any entry with an o in it
+--SELECT first_name FROM people WHERE first_name NOT LIKE '%o%';
+----Displays any entry without an o in it
+--SELECT COUNT(*) FROM people;
+----Gets the amount of entries in the people table.
+--SELECT last_name, COUNT(*) FROM people GROUP BY last_name;
+----Gets a count of how many times each last name appears
+--SELECT last_name, GROUP_CONCAT(mobile) FROM people GROUP BY last_name;
+----Gets the cell phone numbers of each entry based off of their last name
+--SELECT last_name, GROUP_CONCAT(mobile SEPARATOR ' and ') FROM people GROUP BY last_name;
+----Does the same thing as the previous SELECT but adds an and in the middle to seperate the numbers
+--SELECT last_name, GROUP_CONCAT(mobile SEPARATOR ' and ') FROM people GROUP BY last_name  HAVING COUNT(*)>1;
+----Finds all the last names that occur more than once and retrieves their phone number
+--SELECT last_name, GROUP_CONCAT(mobile SEPARATOR ' and ') FROM people WHERE last_name != 'Cabral' GROUP BY last_name  HAVING COUNT(*)>1;
+----Finds all last names that occur more than once that also aren't 'Cabral' and retrieves their phone number
+--SELECT first_name, birthday FROM people ORDER BY birthday;
+----Gets the first names and birthdays of all entries and puts them in order based off the birthday
+--SELECT first_name, birthday FROM people ORDER BY birthday DESC;
+----Does the same function but the chronolization is reversed
+--SELECT first_name, last_name FROM people ORDER BY last_name, first_name;
+----Organizes names by alphabetical order
+--SELECT first_name, birthday FROM people ORDER BY birthday DESC LIMIT 3
+----The chronolization of the birthdates are reversed and the amount of entries is limited to 3
+--SELECT first_name, MONTHNAME(birthday) as mon, birthday FROM people ORDER BY MONTH(birthday);
+----Displays a table of first names, the name of the entries month, as well as the full birthdate string in the final column
+--SELECT last_name, COUNT(*) FROM  people GROUP BY last_name;
+----Gets a count of all the last names
+--SELECT last_name, COUNT(*) FROM  people GROUP BY last_name ORDER BY NULL;
+----Gets a count of all the last name with no order at all
+--INSERT INTO people (first_name, last_name, birthday, home_id)
+--VALUES ('John', 'Smith', '1998-04-07', 4),
+--('Maya', 'Wasserman' , NULL, 4),
+--('Paul', 'Thompson', '1996-05-27', 1);
+----Adds the entries Maya and paul.
+--DELETE FROM people WHERE first_name='Maya';
+----Deletes Maya
+--INSERT INTO people (first_name, last_name, birthday)
+--VALUES ('Eli', 'Kramer', '1984-01-15');
+----Adds entry Eli Kramer
+--SELECT p.first_name, h.address
+--FROM people p
+--INNER JOIN homes h on (p.home_id = h.id);
+----Displays all entries that have matching values in both tables and puts the first names on the right and the addresses in the left hand column.
+--SELECT first_name, last_name
+--FROM people p
+--INNER JOIN homes h on (p.home_id = h.id)
+--WHERE p.HOME_ID = 1;
+----Adds all entries with matching home ids
+--SELECT p.*, h.address, h.homenumber
+--FROM people p
+--INNER JOIN homes h  on (p.home_id = h.id)
+--WHERE p.first_name  LIKE '%e%';
+----Displays all entries with matching home ids that have the letter e in their first name
